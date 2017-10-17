@@ -1,0 +1,165 @@
+body {
+  background-color: #444;
+  color: #DDD;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  width: 100%;
+}
+
+header {
+  align-items: center;
+  background-color: #555;
+  display: flex;
+  height: 80px;
+  justify-content: space-between;
+  margin: 0;
+  overflow: auto;
+  width: 100%;
+}
+
+h1 {
+  margin: 0 0 0 15px;
+}
+
+input {
+  font-size: 1rem;
+}
+
+.flash {
+  background-color: #FFFED2;
+  color: #333;
+  height: 20px;
+  padding: 2px 10px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+/* global/helper classes */
+.error {
+  font-size: 0.7rem;
+}
+
+/* specific classes */
+.loginlogout {
+  display: flex;
+  flex-direction: column;
+  margin: 0 15px 0 0;
+}
+
+  .loginlogout-row {
+    align-items: center;
+    display: flex;
+    margin: 10px 0 0 0;
+  }
+
+    .loginlogout-row-element {
+      font-size: 0.9rem;
+      margin: 0 8px 0 0;
+    }
+
+  .loginlogout-signup {
+    justify-content: flex-end;
+  }
+
+.main {
+  margin: 20px 30px;
+}
+
+.input-post {
+  margin: 0 20px 0 0;
+  padding: 3px;
+  width: 450px;
+}
+
+.posts {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0;
+  max-width: 500px;
+}
+
+  .posts-post {
+    background-color: #EEE;
+    box-shadow: 0 1px 3px #000;
+    box-sizing: border-box;
+    color: #444;
+    height: 60px;
+    margin: 5px 0;
+    padding: 5px;
+  }
+
+    .posts-post-head {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+      .posts-post-head-left {
+        align-items: center;
+        display: flex;
+      }
+
+        .posts-post-head-left-author {
+          font-weight: bold;
+          margin: 0 10px 0 0;
+        }
+
+        .posts-post-head-left-delete {
+          font-size: 0.7rem;
+        }
+
+      .posts-post-head-timestamp {
+        font-size: 0.8rem;
+      }
+
+    .posts-post-content {
+      margin: 5px 0 0 0;
+    }
+
+.signupmodal {
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+  /*display: none;*/
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+  .signupmodal-content {
+    align-items: center;
+    background-color: #EEE;
+    border: none;
+    box-shadow: 0 3px 10px #000;
+    color: #444;
+    display: flex;
+    flex-direction: column;
+    height: 400px;
+    margin: 15% auto;
+    max-width: 500px;
+    width: 90%;
+  }
+
+    .signupmodal-content-form {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
+      .signupmodal-content-form-input {
+        color: #444;
+        height: 25px;
+        margin: 5px 0;
+        width: 80%;
+      }
+
+      .signupmodal-content-form-message {
+        font-size: 0.7rem;
+        height: 15px;
+        margin: 0 0 3px 0;
+        width: 80%;
+      }

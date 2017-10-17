@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="Wispy">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href={{ url_for('static', filename='./css/style.css') }}>
+  <link rel="icon" type="image/x-icon" href={{ url_for('static', filename='./images/favicon.ico') }}>
+  <title>Mumbler</title>
+</head>
+
+<body>
+  {% with messages = get_flashed_messages(category_filter=["login"]) %}
+    {% if messages %}
+    <div id="flash" class="flash">
+      {% for message in messages %}
+      <span>{{ message }}</span>
+      {% endfor %}
+    </div>
+    {% endif %}
+  {% endwith %}
+  <header>
+    <h1>Mumbler</h1>
+    <div class="loginlogout">
+
+      <!-- Log Out button if logged in -->
+      {% if 'user' in session %}
+        <form action="/logout" method="POST">
+          <input type="submit" value="Log Out" name="logout">
+        </form>
+
+      <!-- Log In / Sign Up if not logged in -->
+      {% else %}
+
+        <!-- log in -->
+        <form class="loginlogout-row" action="/login" method="POST">
+          <input class="loginlogout-row-element" type="text" name="username" placeholder="username">
+          <input class="loginlogout-row-element" type="password" name="password" placeholder="password">
+          <input class="loginlogout-row-element" type="submit" value="Log in" name="login">
+        </form>
+
+        <!-- sign up -->
+        <div class="loginlogout-row loginlogout-signup">
+          <span class="loginlogout-row-element">Don't have an account?</span>
+          <button class="loginlogout-row-element" id="signup">Sign Up</button>
+        </div>
+
+      {% endif %}
+    </div>
+  </header>
+
+  <div class="main">
+
+    {% block main %}
+    {% endblock %}
+    
+  </div>
+  <!-- sign up modal 
+  <div class="signupmodal" id="signupmodal">
+    <div class="signupmodal-content">
+      <h3>Create an account</h3>
+      <form class="signupmodal-content-form" action="/register" method="POST">
+
+        <input id="signup-email" class="signupmodal-content-form-input" type="email" name="email" placeholder="Enter your email address" required>
+        <div id="email-message" class="signupmodal-content-form-message"></div>
+
+        <input id="signup-username" class="signupmodal-content-form-input" type="text" name="username" placeholder="Choose a username" required>
+        <div id="username-message" class="signupmodal-content-form-message"></div>
+
+        <input id="signup-password" class="signupmodal-content-form-input" type="password" name="password" placeholder="Create a password" required>
+        <div id="password-message" class="signupmodal-content-form-message"></div>
+
+        <input id="signup-passwordverify" class="signupmodal-content-form-input" type="password" name="password-verify" placeholder="Verify your password" required>
+        <div id="verifypassword-message" class="signupmodal-content-form-message"></div>
+
+        <input id="signup-submit" type="submit" name="submit_account" value="Sign Up">
+      </form>
+      <button id="cancel-signup">Cancel</button>
+    </div>
+  </div> -->
+
+<script>
+  var messages = [];
+  {% with messages = get_flashed_messages(category_filter=["register"]) %}
+    {% for message in messages %}
+      messages.push('{{ message }}');
+    {% endfor %}
+  {% endwith %}
+</script>
+<script src={{ url_for('static', filename='./js/script.js') }}></script> 
+</body>
+  
+</html>
