@@ -50,7 +50,7 @@ input[type="submit"] {
   background-color: #00666E;
   color: #EDEAE6;
   display: flex;
-  height: 80px;
+  min-height: 80px;
   justify-content: space-between;
   margin: 0;
   overflow: auto;
@@ -60,6 +60,7 @@ input[type="submit"] {
   color: #FBE08E; }
 
 .header-title {
+  font-size: 0.9rem;
   margin: 0 0 0 15px; }
 
 .header-usermenu {
@@ -70,27 +71,21 @@ input[type="submit"] {
   margin: 0 10px; }
 
 .header-login {
+  display: flex; }
+
+.header-login-col {
   display: flex;
   flex-direction: column;
-  margin: 0 15px 0 0; }
+  justify-content: center;
+  margin: 0 5px;
+  min-width: 60px; }
 
-.header-login-row {
-  align-items: center;
-  display: flex;
-  margin: 10px 0 0 0; }
-
-.header-login-row-element {
+.header-login-col-el {
   font-size: 0.9rem;
-  margin: 0 8px 0 0; }
+  margin: 0 0 5px 0; }
 
-.header-login-signup {
-  display: flex;
-  justify-content: flex-end; }
-
-.header-hamburgermenu {
-  fill: #9DEDD9;
-  height: 30px;
-  width: 30px; }
+.header-login-col-input {
+  width: 90px; }
 
 .main {
   align-items: center;
@@ -101,10 +96,21 @@ input[type="submit"] {
   max-width: 970px;
   width: 95%; }
 
-.postinput {
-  margin: 20px 20px 0 0;
-  padding: 3px;
+.createpost {
+  height: 100px;
+  margin: 20px 0 0 0;
   width: 300px; }
+
+.createpost-input {
+  border: none;
+  box-shadow: 0 1px 3px #555;
+  height: 40px;
+  margin: 0 0 8px 0;
+  padding: 3px;
+  width: 95%; }
+
+.createpost-submit {
+  margin: 0 0 0 80%; }
 
 .postlist {
   display: flex;

@@ -1,8 +1,8 @@
 {% macro post_input() %}
 
-  <form action="/post" method="POST">
-    <input id="input-post" class="postinput" type="text" placeholder="Enter your post" name="contents" maxlength="50">
-    <input type="submit" value="Post" name="submit_post">
+  <form class="createpost" action="/post" method="POST">
+    <textarea id="input-post" class="createpost-input" placeholder="Enter your post" name="contents" maxlength="50" cols="30" rows="4"></textarea>
+    <input class="createpost-submit" type="submit" value="Post" name="submit_post">
   </form>
   {% with messages = get_flashed_messages(category_filter=["post"]) %}
     {% if messages %}
@@ -28,7 +28,7 @@
           {% if post.author == current_user %}
           <div class="post-head-left-delete">
             <form action="/delete" method="POST">
-              <input class="post-head-left-delete-button" type="submit" value="delete">
+              <button class="post-head-left-delete-button" type="submit">delete</button>
               <input type="text" name="post_id" hidden="true" value="{{ post.id }}">
             </form>
           </div>

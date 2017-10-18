@@ -33,14 +33,14 @@
         </div>
         <div class="header-usermenu-item">
           <form action="/logout" method="POST">
-            <input type="submit" value="Log Out" name="logout">
+            <button type="submit" name="logout">Log Out</button>
           </form>
         </div>
       </div>
 
       <!-- Log In / Sign Up if not logged in -->
       {% else %}
-      <div class="header-login">
+      {# <div class="header-login">
 
         <!-- log in -->
         <form class="header-login-row" action="/login" method="POST">
@@ -54,7 +54,19 @@
           <span class="header-login-row-element">Don't have an account?</span>
           <button class="header-login-row-element" id="signup">Sign Up</button>
         </div>
-      </div>
+      </div> #}
+        <form class="header-login" action="/login" method="POST">
+          <div class="header-login-col">
+            <input class="header-login-col-el header-login-col-input" type="text" name="username" placeholder="username">
+            <input class="header-login-col-el header-login-col-input" type="password" name="password" placeholder="password">
+          </div>
+          <div class="header-login-col">
+            <button class="header-login-col-el" type="submit" name="login">Log In</button>
+            <button type="button" class="header-login-col-el" id="signup">Sign Up</button>
+          </div>
+        </form>
+
+
       {% endif %}
       {# {{ hamburger_menu() }} #}
   </header>
