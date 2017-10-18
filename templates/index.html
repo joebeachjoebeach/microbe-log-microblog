@@ -1,42 +1,11 @@
 {% extends "base.html" %}
+{% from 'macros.html' import post_list, post_input %}
 {% block main %}
 
 {% if 'user' in session %}
-<form action="/post" method="POST">
-  <input id="input-post" class="input-post" type="text" placeholder="Enter your post" name="contents" maxlength="50">
-  <input type="submit" value="Post" name="submit_post">
-</form>
-{% with messages = get_flashed_messages(category_filter=["post"]) %}
-  {% if messages %}
-    {% for message in messages %}
-      <div class="error">{{ message }}</div>
-    {% endfor %}
-  {% endif %}
-{% endwith %}
+  {{ post_input() }}
 {% endif %}
 
-<div class="posts">
-  {% for post in posts %}
-  <div class="posts-post">
-    <div class="posts-post-head">
-      <div class="posts-post-head-left">
-        <div class="posts-post-head-left-author">{{ post.author.username }}</div>
-        {% if post.author == current_user %}
-        <div class="posts-post-head-left-delete">
-          <form action="/delete" method="POST">
-            <input type="submit" value="delete post">
-            <input type="text" name="post_id" hidden="true" value="{{ post.id }}">
-          </form>
-        </div>
-        {% endif %}
-      </div>
-      {% set t = utc_to_local(post.timestamp) %}
-      <div class="posts-post-head-timestamp">{{ t.strftime('%Y/%m/%d at %H:%M') }}</div>
-    </div>
-    
-    <div class="posts-post-content">{{ post.content }}</div>
-  </div>
-  {% endfor %}
-</div>
+{{ post_list(current_user, posts) }}
 
 {% endblock %}

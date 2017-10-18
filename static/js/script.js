@@ -89,6 +89,7 @@ function showModal() {
   submit.setAttribute('value', 'Sign Up');
 
   cancel.id = 'cancel-signup';
+  cancel.className = 'signupmodal-content-cancel';
 
   if (messages.length > 0) {
     messages.forEach(function(message) {

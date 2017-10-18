@@ -1,0 +1,59 @@
+{% macro post_input() %}
+
+  <form action="/post" method="POST">
+    <input id="input-post" class="postinput" type="text" placeholder="Enter your post" name="contents" maxlength="50">
+    <input type="submit" value="Post" name="submit_post">
+  </form>
+  {% with messages = get_flashed_messages(category_filter=["post"]) %}
+    {% if messages %}
+      {% for message in messages %}
+        <div>{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+{% endmacro %}
+
+{% macro post_list(current_user, posts) %}
+
+  <div class="postlist">
+    {% for post in posts %}
+    <div class="post">
+      <div class="post-head">
+        <div class="post-head-left">
+          <div class="post-head-left-author">
+            {% set uname = post.author.username %}
+            <a class="post-head-left-author-link" href="/u/{{ uname }}">{{ uname }}</a>
+          </div>
+          {% if post.author == current_user %}
+          <div class="post-head-left-delete">
+            <form action="/delete" method="POST">
+              <input class="post-head-left-delete-button" type="submit" value="delete">
+              <input type="text" name="post_id" hidden="true" value="{{ post.id }}">
+            </form>
+          </div>
+          {% endif %}
+        </div>
+        {% set t = utc_to_local(post.timestamp) %}
+        <div class="post-head-timestamp">{{ t.strftime('%Y/%m/%d at %H:%M') }}</div>
+      </div>
+      
+      <div class="post-content">{{ post.content }}</div>
+    </div>
+    {% endfor %}
+  </div>
+
+{% endmacro %}
+
+{% macro hamburger_menu() %}
+  <svg class="header-hamburgermenu" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 36">
+    <title>list-1@1x</title>
+    <g id="Layer_2" data-name="Layer 2">
+      <g id="General">
+        <g id="List_1_2x.png" data-name="List 1@2x.png">
+          <path d="M4,8H40a4,4,0,1,0,0-8H4A4,4,0,1,0,4,8ZM4,2H40a2,2,0,1,1,0,4H4A2,2,0,1,1,4,2ZM40,28H4a4,4,0,0,0,0,8H40a4,4,0,1,0,0-8Zm0,6H4a2,2,0,1,1,0-4H40a2,2,0,0,1,0,4Zm0-20H4a4,4,0,1,0,0,8H40a4,4,0,1,0,0-8Zm0,6H4a2,2,0,1,1,0-4H40a2,2,0,1,1,0,4Z"/>
+        </g>
+      </g>
+    </g>
+  </svg>
+{% endmacro %}
