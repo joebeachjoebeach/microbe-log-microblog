@@ -1,6 +1,12 @@
 {% extends "base.html" %}
 {% block main %}
 
+{% if user %}
+<h3>{{ user.username }}</h3>
+{% else %}
+<h3>User not found</h3>
+{% endif %}
+
 {% if 'user' in session %}
 <form action="/post" method="POST">
   <input id="input-post" class="input-post" type="text" placeholder="Enter your post" name="contents" maxlength="50">

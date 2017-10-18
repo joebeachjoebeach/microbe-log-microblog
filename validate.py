@@ -19,3 +19,8 @@ def validate_email(str):
         return True
     return False
 
+def validate_username(str):
+    word_regex = re.compile(r'\W')
+    if word_regex.match(str):
+        return False
+    return True

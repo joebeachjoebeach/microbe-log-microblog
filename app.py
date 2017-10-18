@@ -1,7 +1,7 @@
 from datetime import datetime, timezone
 from flask import Flask, render_template, url_for, g, request, redirect, flash, session, abort
 from flask_sqlalchemy import SQLAlchemy
-from validate import validate_post, validate_email
+from validate import validate_post, validate_email, validate_username
 
 app = Flask(__name__)
 app.config.from_object('config')
@@ -12,8 +12,13 @@ db.init_app(app)
 def utc_to_local(utc_dt):
     return utc_dt.replace(tzinfo=timezone.utc).astimezone(tz=None)
 
-@app.route('/', methods=['GET', 'POST'])
+def redirect_url(default='index'):
+    return request.args.get('next') or \
+           request.referrer or \
+           url_for(default)
+
 @app.route('/index', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def index():
     if ('user' in session):
         current_user = User.query.get(session['user'])
@@ -23,19 +28,27 @@ def index():
     if request.method == 'GET':
         return render_template('index.html', posts=posts, current_user=current_user)
     
-    if 'submit_post' in request.form:
-        post_contents = request.form['contents']
-        validation = validate_post(post_contents)
-        if validation == 'too_long':
-            flash('post must be 50 characters or less', 'post')
-        elif validation == 'empty':
-            flash('post may not be empty', 'post')
-        elif validation == 'ok':
-            post = Post(content=post_contents, timestamp=datetime.utcnow(), author=current_user)
-            db.session.add(post)
-            db.session.commit()
-
     return redirect(url_for('index'))
+
+@app.route('/post', methods=['POST'])
+def post():
+    if ('user' in session):
+        current_user = User.query.get(session['user'])
+        if 'submit_post' in request.form:
+            post_contents = request.form['contents']
+            validation = validate_post(post_contents)
+            if validation == 'too_long':
+                flash('post must be 50 characters or less', 'post')
+            elif validation == 'empty':
+                flash('post may not be empty', 'post')
+            elif validation == 'ok':
+                post = Post(content=post_contents, timestamp=datetime.utcnow(), author=current_user)
+                db.session.add(post)
+                db.session.commit()
+    else:
+        current_user = None
+
+    return redirect(redirect_url())
 
 
 @app.route('/login', methods=['POST'])
@@ -79,6 +92,9 @@ def register():
     if not validate_email(email):
         flash('not a valid email address')
         errors = True
+    if not validate_username(username):
+        flash('username must only contain letters, numbers, and underscore')
+        errors = True
     if not errors:
         new_user = User(username=username, password=password, email=email)
         db.session.add(new_user)
@@ -87,17 +103,26 @@ def register():
 
     return redirect(url_for('index'))
 
+
 @app.route('/delete', methods=['POST'])
 def delete():
-    # post_to_delete = Post.query.get(request.form[0])
-    # db.session.delete(post_to_delete)
-    # db.session.commit
-
     post_to_delete = Post.query.get(int(request.form['post_id']))
     db.session.delete(post_to_delete)
     db.session.commit()
     
-    return redirect(url_for('index'))
+    # return redirect(url_for('index'))
+    return redirect(redirect_url())
+
+@app.route('/u/<uname>')
+def user(uname):
+    if ('user' in session):
+        current_user = User.query.get(session['user'])
+    else:
+        current_user = None
+    user = User.query.filter_by(username=uname).first()
+    posts = Post.query.filter_by(author=user).order_by(Post.id.desc())
+    return render_template('user.html', posts=posts, user=user, current_user=current_user)
+
 
 app.jinja_env.globals.update(utc_to_local=utc_to_local)
 

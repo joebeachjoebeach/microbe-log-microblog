@@ -1,46 +1,6 @@
 var signup = document.getElementById('signup');
-// var modal = document.getElementById('signupmodal');
-// var signupEmail = document.getElementById('signup-email');
-// var emailMessage = document.getElementById('email-message');
-// var signupUsername = document.getElementById('signup-username');
-// var usernameMessage = document.getElementById('username-message');
-// var signupPassword = document.getElementById('signup-password');
-// var passwordMessage = document.getElementById('password-message');
-// var signupPasswordVerify = document.getElementById('signup-passwordverify');
-// var passwordVerifyMessage = document.getElementById('verifypassword-message');
-// var signupSubmit = document.getElementById('signup-submit');
 var flash = document.getElementById('flash');
 var errors = [];
-
-// var cancelSignUp = document.getElementById('cancel-signup');
-
-// if (signup && modal) {
-//   signup.addEventListener('click', function() {
-//     modal.style.display = 'block';
-//   });
-
-//   cancelSignUp.addEventListener('click', function() {
-//     modal.style.display = 'none';
-//   });
-
-//   signupEmail.addEventListener('blur', function(event) {
-//     var validEmailRegEx = /([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+(\.[a-zA-Z]{2,6}))/;
-
-//     if (!event.target.value.match(validEmailRegEx))
-//       displaySignupError(signupEmail, emailMessage, 'invalid email address');
-//   });
-
-//   signupEmail.addEventListener('input', function() {
-//     clearSignupError(signupEmail, emailMessage);
-//   });
-
-//   signupPasswordVerify.addEventListener('input', function(event) {
-//     if (event.target.value !== signupPassword.value)
-//       displaySignupError(signupPasswordVerify, passwordVerifyMessage, 'passwords do not match');
-//     else
-//       clearSignupError(signupPasswordVerify, passwordVerifyMessage);
-//   });
-// }
 
 if (signup) {
   signup.addEventListener('click', function() {
@@ -54,21 +14,9 @@ if (flash) {
   }, 3000);
 }
 
-// if (messages.length > 0) {
-//   modal.style.display = 'block';
-//   messages.forEach(function(message) {
-//     if (message.search('email') > -1) {
-//       emailMessage.textContent = message;
-//     }
-//     if (message.search('username') > -1) {
-//       usernameMessage.textContent = message;
-//     }
-//     if (message.search('password') > -1) {
-//       passwordMessage.textContent = message;
-//     }
-//   });
-// }
-
+if (messages.length > 0) {
+  showModal();
+}
 
 var modal;
 var submit;
@@ -142,6 +90,20 @@ function showModal() {
 
   cancel.id = 'cancel-signup';
 
+  if (messages.length > 0) {
+    messages.forEach(function(message) {
+      if (message.search('email') > -1)
+        emailMsg.textContent = message;
+      
+      if (message.search('username') > -1)
+        usernameMsg.textContent = message;
+      
+      if (message.search('password') > -1)
+        passMsg.textContent = message;
+    });
+    messages = [];
+  }
+
   cancel.addEventListener('click', function() {
     hideModal();
   });
@@ -155,6 +117,14 @@ function showModal() {
 
   emailInput.addEventListener('input', function() {
     clearSignupError(emailInput, emailMsg);
+  });
+
+  usernameInput.addEventListener('input', function(event) {
+    if (event.target.value.match(/\W/))
+      displaySignupError(usernameInput, usernameMsg, 'username can only contain letters, numbers, and underscore');
+    else {
+      clearSignupError(usernameInput, usernameMsg);
+    }
   });
 
   vPassInput.addEventListener('input', function(event) {
