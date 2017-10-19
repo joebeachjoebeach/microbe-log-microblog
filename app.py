@@ -2,9 +2,14 @@ from datetime import datetime, timezone
 from flask import Flask, render_template, url_for, g, request, redirect, flash, session, abort
 from flask_sqlalchemy import SQLAlchemy
 from validate import validate_post, validate_email, validate_username
+import os
 
 app = Flask(__name__)
-app.config.from_object('config')
+
+if os.environ.get('HEROKU') is None:
+    app.config.from_object('config')
+else:
+    app.config.from_object('config-prod')
 
 from models import User, Post, db
 db.init_app(app)

@@ -11,6 +11,7 @@ flask = "*"
 bcrypt = "*"
 flask-sqlalchemy = "*"
 "psycopg2" = "*"
+gunicorn = "*"
 
 
 [dev-packages]
