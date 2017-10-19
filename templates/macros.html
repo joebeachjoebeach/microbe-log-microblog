@@ -1,7 +1,7 @@
 {% macro post_input() %}
 
   <form class="createpost" action="/post" method="POST">
-    <input id="input-post" class="createpost-input" placeholder="Enter your post" maxlength="50" type="text" name="contents">
+    <input id="input-post" class="createpost-input" placeholder="Enter your post" maxlength="50" type="text" name="contents" required>
     <button class="createpost-submit" name="submit_post">Post</button>
   </form>
   {% with messages = get_flashed_messages(category_filter=["post"]) %}

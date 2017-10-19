@@ -160,6 +160,19 @@ input:focus {
         width: 90px;
       }
 
+
+  @media only screen and (min-width: 768px) {
+    
+    // .header-login-col {
+    //   width: 120px;
+    // }
+
+    .header-login-col-input {
+      width: 180px;
+    }
+
+  }
+
 .main {
   align-items: center;
   display: flex;
