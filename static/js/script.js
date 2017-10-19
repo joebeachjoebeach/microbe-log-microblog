@@ -33,7 +33,7 @@ function showModal() {
   var passMsg = document.createElement('DIV');
   var vPassInput = document.createElement('INPUT');
   var vPassMsg = document.createElement('DIV');
-  submit = document.createElement('INPUT');
+  submit = document.createElement('BUTTON');
   var cancel = document.createElement('BUTTON');
 
   modal.className = 'signupmodal';
@@ -84,9 +84,10 @@ function showModal() {
   vPassMsg.className = 'signupmodal-content-form-message';
 
   submit.id = 'signup-submit';
-  submit.setAttribute('type', 'submit');
-  submit.setAttribute('name', 'submit_account');
-  submit.setAttribute('value', 'Sign Up');
+  // submit.setAttribute('type', 'submit');
+  // submit.setAttribute('name', 'submit_account');
+  // submit.setAttribute('value', 'Sign Up');
+  submit.textContent = 'Sign Up';
 
   cancel.id = 'cancel-signup';
   cancel.className = 'signupmodal-content-cancel';

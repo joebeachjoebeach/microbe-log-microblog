@@ -12,6 +12,12 @@ db.init_app(app)
 def utc_to_local(utc_dt):
     return utc_dt.replace(tzinfo=timezone.utc).astimezone(tz=None)
 
+def time_to_string(date_time):
+    t = utc_to_local(date_time)
+    months = [None, 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    return f'{months[t.month]} {str(t.day)} at {str(t.hour)}:{str(t.minute)}'
+
+
 def redirect_url(default='index'):
     return request.args.get('next') or \
            request.referrer or \
@@ -110,7 +116,6 @@ def delete():
     db.session.delete(post_to_delete)
     db.session.commit()
     
-    # return redirect(url_for('index'))
     return redirect(redirect_url())
 
 @app.route('/u/<uname>')
@@ -125,6 +130,7 @@ def user(uname):
 
 
 app.jinja_env.globals.update(utc_to_local=utc_to_local)
+app.jinja_env.globals.update(time_to_string=time_to_string)
 
 if __name__ == '__main__':
     app.run()

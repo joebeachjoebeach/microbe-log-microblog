@@ -1,8 +1,8 @@
 {% macro post_input() %}
 
   <form class="createpost" action="/post" method="POST">
-    <textarea id="input-post" class="createpost-input" placeholder="Enter your post" name="contents" maxlength="50" cols="30" rows="4"></textarea>
-    <input class="createpost-submit" type="submit" value="Post" name="submit_post">
+    <input id="input-post" class="createpost-input" placeholder="Enter your post" maxlength="50" type="text" name="contents">
+    <button class="createpost-submit" name="submit_post">Post</button>
   </form>
   {% with messages = get_flashed_messages(category_filter=["post"]) %}
     {% if messages %}
@@ -34,8 +34,7 @@
           </div>
           {% endif %}
         </div>
-        {% set t = utc_to_local(post.timestamp) %}
-        <div class="post-head-timestamp">{{ t.strftime('%Y/%m/%d at %H:%M') }}</div>
+        <div class="post-head-timestamp">{{ time_to_string(post.timestamp) }}</div>
       </div>
       
       <div class="post-content">{{ post.content }}</div>
@@ -43,17 +42,4 @@
     {% endfor %}
   </div>
 
-{% endmacro %}
-
-{% macro hamburger_menu() %}
-  <svg class="header-hamburgermenu" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 36">
-    <title>list-1@1x</title>
-    <g id="Layer_2" data-name="Layer 2">
-      <g id="General">
-        <g id="List_1_2x.png" data-name="List 1@2x.png">
-          <path d="M4,8H40a4,4,0,1,0,0-8H4A4,4,0,1,0,4,8ZM4,2H40a2,2,0,1,1,0,4H4A2,2,0,1,1,4,2ZM40,28H4a4,4,0,0,0,0,8H40a4,4,0,1,0,0-8Zm0,6H4a2,2,0,1,1,0-4H40a2,2,0,0,1,0,4Zm0-20H4a4,4,0,1,0,0,8H40a4,4,0,1,0,0-8Zm0,6H4a2,2,0,1,1,0-4H40a2,2,0,1,1,0,4Z"/>
-        </g>
-      </g>
-    </g>
-  </svg>
 {% endmacro %}

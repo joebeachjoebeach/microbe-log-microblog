@@ -1,14 +1,14 @@
-{% from 'macros.html' import hamburger_menu %}
 <!doctype html>
 <html>
 <head>
   <meta charset="utf-8">
   <meta name="description" content="Wispy">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Titillium+Web:200,400,700" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='./css/normalize.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='./css/style2.css') }}">
   <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='./images/favicon.ico') }}">
-  <title>Mumbler</title>
+  <title>Microbe Log Microblog</title>
 </head>
 
 <body>
@@ -22,7 +22,7 @@
     {% endif %}
   {% endwith %}
   <header class="header">
-    <a class="header-title header-link" href="/"><h1>Mumbler</h1></a>
+    <a class="header-title header-link" href="/"><h1>Microbe Log Microblog</h1></a>
 
       <!-- Log Out button if logged in -->
       {% if 'user' in session %}
@@ -40,21 +40,6 @@
 
       <!-- Log In / Sign Up if not logged in -->
       {% else %}
-      {# <div class="header-login">
-
-        <!-- log in -->
-        <form class="header-login-row" action="/login" method="POST">
-          <input class="header-login-row-element" type="text" name="username" placeholder="username">
-          <input class="header-login-row-element" type="password" name="password" placeholder="password">
-          <input class="header-login-row-element" type="submit" value="Log in" name="login">
-        </form>
-
-        <!-- sign up -->
-        <div class="header-login-row header-login-signup">
-          <span class="header-login-row-element">Don't have an account?</span>
-          <button class="header-login-row-element" id="signup">Sign Up</button>
-        </div>
-      </div> #}
         <form class="header-login" action="/login" method="POST">
           <div class="header-login-col">
             <input class="header-login-col-el header-login-col-input" type="text" name="username" placeholder="username">
@@ -68,7 +53,6 @@
 
 
       {% endif %}
-      {# {{ hamburger_menu() }} #}
   </header>
 
   <div class="main">
