@@ -23,19 +23,17 @@ def redirect_url(default='index'):
            request.referrer or \
            url_for(default)
 
-@app.route('/index', methods=['GET', 'POST'])
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/index')
+@app.route('/')
 def index():
     if ('user' in session):
         current_user = User.query.get(session['user'])
     else:
         current_user = None
     posts = Post.query.order_by(Post.id.desc())
-    if request.method == 'GET':
-        return render_template('index.html', posts=posts, current_user=current_user)
+    return render_template('index.html', posts=posts, current_user=current_user)
     
-    return redirect(url_for('index'))
-
+    
 @app.route('/post', methods=['POST'])
 def post():
     if ('user' in session):

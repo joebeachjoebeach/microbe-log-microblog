@@ -2,3 +2,5 @@ __pycache__
 init_db.py
 **.DS_Store
 .sass-cache
+config.py
+static/css/src_style.css.map

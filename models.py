@@ -1,6 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
 import bcrypt
-# import six
 
 db = SQLAlchemy()
 
