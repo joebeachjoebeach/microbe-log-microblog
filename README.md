@@ -1,8 +1,6 @@
 **Microbe Log Microblog**
 
-A work-in-progress using Flask.
+Microbe Log Microblog is a Twitter-like service that lets you log your favorite microbes.
 
-Are you sick of people on Twitter and other microblogging services talking about things other than microbes?
-
-Look no further!
+Check it out [here](http://microbe-log-microblog.herokuapp.com)
 

@@ -1,6 +1,6 @@
 $off-white: #FCFDEF;
 $charcoal: #3B444B;
-$red: #C01400;
+$teal: #009999;
 $thin-border: 1px solid $charcoal;
 $thick-border: 3px solid $charcoal;
 
@@ -92,7 +92,7 @@ input[type="submit"] {
 }
 
 input:focus {
-  border-bottom: 1px solid $red;
+  border-bottom: 1px solid $teal;
   outline: none !important;
 }
 
@@ -195,7 +195,7 @@ input:focus {
   }
 
   .createpost-input:focus {
-    border-color: $red;
+    border-color: $teal;
     outline: none !important;
   }
 

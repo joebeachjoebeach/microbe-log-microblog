@@ -6,7 +6,7 @@ import os
 
 app = Flask(__name__)
 
-app.config.from_object('config-prod')
+app.config.from_object('config')
 
 from models import User, Post, db
 db.init_app(app)
@@ -134,38 +134,3 @@ app.jinja_env.globals.update(time_to_string=time_to_string)
 
 if __name__ == '__main__':
     app.run()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

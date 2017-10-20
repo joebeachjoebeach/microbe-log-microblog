@@ -56,7 +56,7 @@ input[type="submit"] {
   cursor: pointer; }
 
 input:focus {
-  border-bottom: 1px solid #C01400;
+  border-bottom: 1px solid #009999;
   outline: none !important; }
 
 .flash {
@@ -135,7 +135,7 @@ input:focus {
   width: 95%; }
 
 .createpost-input:focus {
-  border-color: #C01400;
+  border-color: #009999;
   outline: none !important; }
 
 .createpost-submit {
