@@ -6,7 +6,7 @@ import os
 
 app = Flask(__name__)
 
-if (os.environ['HEROKU'] === 1):
+if (os.environ['HEROKU'] == 1):
     app.config.from_object('config-prod')
 else:
     app.config.from_object('config')
