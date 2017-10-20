@@ -6,10 +6,10 @@ import os
 
 app = Flask(__name__)
 
-if (os.environ['HEROKU'] == 1):
-    app.config.from_object('config-prod')
-else:
+if (os.environ.get['HEROKU'] is None):
     app.config.from_object('config')
+else:
+    app.config.from_object('config-prod')
 
 from models import User, Post, db
 db.init_app(app)
