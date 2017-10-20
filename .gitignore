@@ -3,3 +3,4 @@ __pycache__
 .sass-cache
 config.py
 static/css/src_style.css.map
+secrets.sh
